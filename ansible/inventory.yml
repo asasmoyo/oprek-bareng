@@ -1,0 +1,17 @@
+all:
+  hosts:
+    node1:
+      ansible_user: vagrant
+      ansible_host: 10.10.10.11
+      ansible_ssh_private_key_file: .vagrant/machines/node-1/virtualbox/private_key
+      ansible_ssh_common_args: -o StrictHostKeyChecking=no
+    node2:
+      ansible_user: vagrant
+      ansible_host: 10.10.10.12
+      ansible_ssh_private_key_file: .vagrant/machines/node-2/virtualbox/private_key
+      ansible_ssh_common_args: -o StrictHostKeyChecking=no
+    node3:
+      ansible_user: vagrant
+      ansible_host: 10.10.10.13
+      ansible_ssh_private_key_file: .vagrant/machines/node-3/virtualbox/private_key
+      ansible_ssh_common_args: -o StrictHostKeyChecking=no
