@@ -1,0 +1,51 @@
+# download binary (zip)
+- name: Install required packages
+  apt:
+    name: [unzip]
+    state: present
+
+- name: Create consul directory
+  file:
+    path: /opt/consul
+    state: directory
+
+- name: Download consul
+  get_url:
+    url: https://releases.hashicorp.com/consul/1.8.3/consul_1.8.3_linux_amd64.zip
+    dest: /opt/consul/consul_1.8.3_linux_amd64.zip
+    checksum: sha256:b72e9eac5405c691c2e3b50819900ca84a79f2f6e7d73aa91f2a336fc2bcacb0
+    mode: '0664'
+
+# extract binary
+
+- name: Extract consul
+  unarchive:
+    src: /opt/consul/consul_1.8.3_linux_amd64.zip
+    dest: /opt/consul
+    remote_src: yes
+
+# buat consul config
+
+- name: Create consul config directory
+  file:
+    path: /etc/consul
+    state: directory
+
+- name: Create consul config
+  template:
+    src: config.hcl.j2
+    dest: /etc/consul/consul.hcl
+
+# buat systemd service
+- name: Create consul systemd service
+  template:
+    src: consul.service.j2
+    dest: /etc/systemd/system/consul.service
+
+# start service
+- name: Start consul service
+  systemd:
+    name: consul
+    daemon_reload: yes
+    enabled: yes
+    state: restarted

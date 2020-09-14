@@ -13,3 +13,25 @@
 ```
 vagrant ssh-config > ssh_config
 ```
+
+# Consul (Hashicorp)
+
+minimal 3 'consul server'
+
+node lain sebagain 'consul client'
+
+1. Service discovery
+
+    Mendiscover service di data center
+
+    ex: app butuh database, dari pada ip ne database di taruh di app manual, bisa lewat consul. otomatis update kalau ip ne database berubah
+
+    consul-template
+
+    ```
+    db_host=database.service.consul
+    db_user={{ key 'foo/db_user' }}
+    ```
+
+2. Distributed key value store
+

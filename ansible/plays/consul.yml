@@ -1,0 +1,13 @@
+# setup consul server
+- hosts: consul_server
+  become: yes
+  become_user: root
+  roles:
+    - consul
+
+# # setup consul client
+# - hosts: all - consul_server
+#   become: yes
+#   become_user: root
+#   tasks:
+#     - include_role: consul
