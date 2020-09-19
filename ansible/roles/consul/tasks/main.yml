@@ -24,6 +24,12 @@
     dest: /opt/consul
     remote_src: yes
 
+- name: Link consul binary
+  file:
+    path: /usr/local/bin/consul
+    src: /opt/consul/consul
+    state: link
+
 # buat consul config
 
 - name: Create consul config directory
@@ -35,6 +41,12 @@
   template:
     src: config.hcl.j2
     dest: /etc/consul/consul.hcl
+
+# buat consul data dir
+- name: Create consul data dir
+  file:
+    path: /var/lib/consul
+    state: directory
 
 # buat systemd service
 - name: Create consul systemd service

@@ -1,0 +1,43 @@
+# download binary (zip)
+- name: Install required packages
+  apt:
+    name: [unzip]
+    state: present
+
+- name: Create consul-template directory
+  file:
+    path: /opt/consul-template
+    state: directory
+
+- name: Download consul-template
+  get_url:
+    url: https://releases.hashicorp.com/consul-template/0.25.1/consul-template_0.25.1_linux_amd64.zip
+    dest: /opt/consul-template/consul-template_0.25.1_linux_amd64.zip
+    checksum: sha256:58356ec125c85b9705dc7734ed4be8491bb4152d8a816fd0807aed5fbb128a7b
+    mode: '0664'
+
+# extract binary
+
+- name: Extract consul-template
+  unarchive:
+    src: /opt/consul-template/consul-template_0.25.1_linux_amd64.zip
+    dest: /opt/consul-template
+    remote_src: yes
+
+- name: Link consul-template binary
+  file:
+    path: /usr/local/bin/consul-template
+    src: /opt/consul-template/consul-template
+    state: link
+
+# # buat consul config
+
+# - name: Create consul config directory
+#   file:
+#     path: /etc/consul
+#     state: directory
+
+# - name: Create consul config
+#   template:
+#     src: config.hcl.j2
+#     dest: /etc/consul/consul.hcl
