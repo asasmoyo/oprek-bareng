@@ -2,7 +2,7 @@
 
 ## Requirements
 
-1. Install Visual Studio Code
+1. Install Visual Studio Code (menyesuaikan OS)
 
 1. Install Remote SSH Extension (https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
 
@@ -17,12 +17,15 @@ vagrant ssh-config > ssh_config
 # Consul (Hashicorp)
 
 minimal 3 'consul server'
-
 node lain sebagain 'consul client'
+
+- 1 master
+- 2 node
+
 
 1. Service discovery
 
-    Mendiscover service di data center
+    Fungsinya adalah mendiscover service di data center
 
     ex: app butuh database, dari pada ip ne database di taruh di app manual, bisa lewat consul. otomatis update kalau ip ne database berubah
 
